@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\_Scripts\Weapons\WeaponTransformInitialize.cs">
+    <Files>
+      <File FileName="Assets\_Scripts\Utils\StateMachine.cs" Line="79" Column="1" />
+      <File FileName="Assets\_Scripts\Weapons\WeaponData.cs" Line="12" Column="1" />
+      <File FileName="Assets\_Scripts\Weapons\WeaponTransformInitialize.cs" Line="9" Column="47" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
