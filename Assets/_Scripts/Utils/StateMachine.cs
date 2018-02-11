@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour {
-	protected Dictionary<string, List<Func<string>>> Transitions = new Dictionary<string, List<Func<string>>> ();
-	private Dictionary<string, Action> EnterEvent = new Dictionary<string, Action> (),
+	public Dictionary<string, List<Func<string>>> Transitions = new Dictionary<string, List<Func<string>>> ();
+	public Dictionary<string, Action> EnterEvent = new Dictionary<string, Action> (),
 	ExitEvent = new Dictionary<string, Action> ();
 	private string mCurrentState;
 	public string CurrentState {
@@ -13,7 +13,7 @@ public abstract class StateMachine : MonoBehaviour {
 			return mCurrentState;
 		}
 		private set {
-			if (ExitEvent.ContainsKey (mCurrentState))
+			if (mCurrentState != null && ExitEvent.ContainsKey (mCurrentState))
 				ExitEvent [mCurrentState].Invoke ();
 			mCurrentState = value;
 			if (EnterEvent.ContainsKey (value))
@@ -45,7 +45,7 @@ public abstract class StateMachine : MonoBehaviour {
 	/// 加入一个新的状态。如果该状态已存在会报InvalidOpreationException.
 	/// </summary>
 	/// <param name="stateName">新状态的名字</param>
-	protected void RegisterState (string stateName, Action enterAction = null, Action exitAction = null) {
+	public void RegisterState (string stateName, Action enterAction = null, Action exitAction = null) {
 		if (Transitions.ContainsKey (stateName))
 			throw new InvalidOperationException (string.Format ("State {0} already registered!", stateName));
 		Transitions.Add (stateName, new List<Func<string>> ());
@@ -60,13 +60,13 @@ public abstract class StateMachine : MonoBehaviour {
 	/// </summary>
 	/// <param name="fromState">当前状态</param>
 	/// <param name="transition">一个函数，如果返回null则状态不会改变，如果返回非null则转换到另一状态。</param>
-	protected void RegisterTransition (string fromState, Func<string> transition) {
+	public void RegisterTransition (string fromState, Func<string> transition) {
 		if (!Transitions.ContainsKey (fromState))
 			throw new ArgumentOutOfRangeException (string.Format ("State {0} is not registered!", fromState));
 		Transitions [fromState].Add (transition);
 	}
 
-	protected void ForceSetState (string newState) {
+	public void ForceSetState (string newState) {
 		if (!Transitions.ContainsKey (newState))
 			throw new ArgumentOutOfRangeException (string.Format ("State {0} is not registered!", newState));
 		CurrentState = newState;
